@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
 
@@ -22,6 +23,7 @@ string encrypt(string text)
 
 int main()
 {
+
     string message;
     cout << "Enter message to encrypt: ";
     getline(cin, message);
