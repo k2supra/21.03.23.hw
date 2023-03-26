@@ -6,34 +6,30 @@ using namespace std;
 
 int main()
 {
-    ifstream file1("file1.txt");
-    ifstream file2("file2.txt");
-    string line1, line2;
-    int lineNumber = 1;
+    
 
-    while (getline(file1, line1) && getline(file2, line2))
+    ifstream input_file("file1_6.txt");
+
+    string search_word;
+    cout << "Enter a word: ";
+    getline(cin, search_word);
+
+    string line;
+    int count = 0;
+
+    while (getline(input_file, line))
     {
-        if (line1 != line2)
+        size_t pos = line.find(search_word);
+        while (pos != string::npos)
         {
-            cout << "Lines at line number " << lineNumber << " don't match:\n"
-                << "File 1: " << line1 << '\n'
-                << "File 2: " << line2 << '\n';
-            return 0;
+            count++;
+            pos = line.find(search_word, pos + search_word.length());
         }
-        ++lineNumber;
     }
 
-    if (std::getline(file1, line1))
-    {
-        cout << "File 1 has additional lines starting at line number " << lineNumber << ":\n"
-            << line1 << '\n';
-    }
+    input_file.close();
 
-    if (getline(file2, line2))
-    {
-        std::cout << "File 2 has additional lines starting at line number " << lineNumber << ":\n"
-            << line2 << '\n';
-    }
+    cout << "Number of words '" << search_word << "' in file: " << count << endl;
 
     return 0;
 }
