@@ -6,34 +6,29 @@ using namespace std;
 
 int main()
 {
-    ifstream file1("file1.txt");
-    ifstream file2("file2.txt");
-    string line1, line2;
-    int lineNumber = 1;
+    ifstream file1("file_1_7.txt");
+    ofstream file2("file_2_7.txt");
+    string line, old_word, new_word;
+    
+    cout << "Enter old word: ";
+    getline(cin, old_word);
+    cout << "Enter new word: ";
+    getline(cin, new_word);
 
-    while (getline(file1, line1) && getline(file2, line2))
+    while (getline(file1, line))
     {
-        if (line1 != line2)
+        size_t pos = 0;
+        while ((pos = line.find(old_word, pos)) != std::string::npos)
         {
-            cout << "Lines at line number " << lineNumber << " don't match:\n"
-                << "File 1: " << line1 << '\n'
-                << "File 2: " << line2 << '\n';
-            return 0;
+            line.replace(pos, old_word.length(), new_word);
+            pos += new_word.length();
         }
-        ++lineNumber;
+        file2 << line << '\n';
     }
 
-    if (std::getline(file1, line1))
-    {
-        cout << "File 1 has additional lines starting at line number " << lineNumber << ":\n"
-            << line1 << '\n';
-    }
-
-    if (getline(file2, line2))
-    {
-        std::cout << "File 2 has additional lines starting at line number " << lineNumber << ":\n"
-            << line2 << '\n';
-    }
+    file1.close();
+    file2.close();
+    
 
     return 0;
 }
