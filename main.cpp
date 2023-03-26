@@ -62,7 +62,7 @@ int main()
         }
     }
     cout << "Rows: " << counter_string << "\nSymbols: " << counter_symbols << "\nVowels: " << counter_vowel << "\nNot vowels: " << counter_not_vowel << "\nNumbers: " << counter_numbers;
-    file_2 << "Rows: " << counter_string << "\nSymbols: " << counter_symbols;
+    file_2 << "Rows: " << counter_string << "\nSymbols: " << counter_symbols << "\nVowels: " << counter_vowel << "\nNot vowels: " << counter_not_vowel << "\nNumbers: " << counter_numbers;
 
     file_1.close();
     file_2.close();
