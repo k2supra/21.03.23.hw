@@ -18,7 +18,7 @@ int main()
             file2 << line << endl;
         }
     }
-
+    cout << "DONE";
     file1.close();
     file2.close();
 
