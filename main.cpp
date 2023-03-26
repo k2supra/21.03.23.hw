@@ -23,14 +23,15 @@ string encrypt(string text)
 
 int main()
 {
-
+    ifstream read("file__1.txt");
     string message;
-    cout << "Enter message to encrypt: ";
-    getline(cin, message);
+    getline(read, message);
     
 
     string encrypted_message = encrypt(message);
     cout << "Encrypted message: " << encrypted_message << endl;
+
+    read.close();
 
     return 0;
 }
