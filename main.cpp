@@ -4,36 +4,68 @@
 
 using namespace std;
 
+
 int main()
 {
-    ifstream file1("file1.txt");
-    ifstream file2("file2.txt");
-    string line1, line2;
-    int lineNumber = 1;
+    ifstream file_1("file_1.txt");
+    ofstream file_2("file_2.txt");
 
-    while (getline(file1, line1) && getline(file2, line2))
+    string line;
+    char vowel[6] = { 'a', 'e', 'i', 'o', 'u', 'y' };
+    char not_vowel[20] = { 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z' };
+    char numbers[10] = { '1','2','3','4','5','6','7','8','9','0' };
+    int counter_string = 0;
+    int counter_symbols = 0;
+    int counter_vowel = 0;
+    int counter_not_vowel = 0;
+    int counter_numbers = 0;
+
+    cout << "START" << endl;
+    
+    if (file_1.is_open())
     {
-        if (line1 != line2)
+        while (getline(file_1, line))
         {
-            cout << "Lines at line number " << lineNumber << " don't match:\n"
-                << "File 1: " << line1 << '\n'
-                << "File 2: " << line2 << '\n';
-            return 0;
+
+            counter_string++;
+            counter_symbols += line.length();
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < line.length(); j++)
+                {
+                    if (tolower(line[j]) == vowel[i])
+                    {
+                        counter_vowel++;
+                    }
+                }
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                for (int j = 0; j < line.length(); j++)
+                {
+                    if (tolower(line[j]) == not_vowel[i])
+                    {
+                        counter_not_vowel++;
+                    }
+                }
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < line.length(); j++)
+                {
+                    if (line[j] == numbers[i])
+                    {
+                        counter_numbers++;
+                    }
+                }
+            }
         }
-        ++lineNumber;
     }
+    cout << "Rows: " << counter_string << "\nSymbols: " << counter_symbols << "\nVowels: " << counter_vowel << "\nNot vowels: " << counter_not_vowel << "\nNumbers: " << counter_numbers;
+    file_2 << "Rows: " << counter_string << "\nSymbols: " << counter_symbols;
 
-    if (std::getline(file1, line1))
-    {
-        cout << "File 1 has additional lines starting at line number " << lineNumber << ":\n"
-            << line1 << '\n';
-    }
-
-    if (getline(file2, line2))
-    {
-        std::cout << "File 2 has additional lines starting at line number " << lineNumber << ":\n"
-            << line2 << '\n';
-    }
+    file_1.close();
+    file_2.close();
 
     return 0;
 }

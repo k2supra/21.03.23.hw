@@ -1,0 +1,2 @@
+Rows: 10
+Symbols: 1101
